@@ -2,27 +2,36 @@ import { useContext, useState } from "react";
 import { UserContext } from "../contexts/userContext.js";
 import {IoAddCircleOutline, IoRemoveCircleOutline, IoLogOutOutline} from "react-icons/io5"
 import Transaction from "../components/Transaction.jsx";
-import { ButtonTransaction, ContainerButtons, ContainerHome, ContainerTransactions, Header } from "../components/Styled.js";
+import { ButtonTransaction, ContainerButtons, ContainerHome, ContainerTotal, ContainerTransactions, Header } from "../components/Styled.js";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 
 export default function Home(){
   const {user} = useContext(UserContext)
   const [transactions, setTransactions] = useState(null)  
+  const [total, setTotal] = useState(0)
+  const navigate = useNavigate();
 
-  function getTotal(){
-    let total = 0
+  function getTotal(){    
+    let sum = 0;
     transactions.forEach(el => {
       if(el.type === "out"){
-        total-=el.value
+        sum-=el.value
       } else {
-        total+=el.value
+        sum+=el.value
       }
     });
+    setTotal(sum);
+  }
+
+  function logout(){
+    localStorage.removeItem("user")
+    navigate("/")
   }
 
   return(
     <ContainerHome>
-      <Header><h1>{`Olá, ${user}`}</h1> <IoLogOutOutline size={"25px"} color="#FFFFFF" /> </Header>
+      <Header><h1>{`Olá, ${user}`}</h1> <IoLogOutOutline onClick={logout} size={"25px"} color="#FFFFFF" /> </Header>
       <ContainerTransactions>
         <div>
       <Transaction date={"20/04"}
@@ -42,13 +51,17 @@ export default function Home(){
         type={el.type}
         />) : <h2>Não há registros de entrada ou saída</h2>} */}
         </div>
-        <div>
-          <h3><strong>Saldo</strong></h3><h3>{total}</h3>
-        </div>
+        <ContainerTotal>
+          <h3><strong>SALDO</strong></h3><h3>{total}</h3>
+        </ContainerTotal>
       </ContainerTransactions>
       <ContainerButtons>
-        <ButtonTransaction><IoAddCircleOutline size={"25px"} /><h2>Nova entrada</h2></ButtonTransaction>
-        <ButtonTransaction><IoRemoveCircleOutline size={"25px"} /><h2>Nova saída</h2></ButtonTransaction>
+        <Link to={"/nova-transacao/in"}>
+          <ButtonTransaction><IoAddCircleOutline size={"25px"} /><h2>Nova entrada</h2></ButtonTransaction>
+        </Link>
+        <Link to={"/nova-transacao/out"}>
+          <ButtonTransaction><IoRemoveCircleOutline size={"25px"} /><h2>Nova saída</h2></ButtonTransaction>
+        </Link>
       </ContainerButtons>      
     </ContainerHome>
   )

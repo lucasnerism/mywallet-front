@@ -81,6 +81,7 @@ export const ContainerTransactions = styled.div`
   padding: 23px 12px 10px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   h2{
     position: absolute;
     left: 50%;
@@ -91,6 +92,15 @@ export const ContainerTransactions = styled.div`
     font-size: 20px;
     line-height: 23px;
     width: 200px;
+  }  
+`;
+
+export const ContainerTotal = styled.div`
+  display: flex;
+  justify-content: space-between;
+  font-size: 17px;
+  strong{
+    font-weight: 700;
   }
 `;
 
