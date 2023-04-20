@@ -3,7 +3,7 @@ import Logo from "../components/Logo";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { UserContext } from "../contexts/userContext.js";
-import { Container, Form } from "../style/signPagesStyle.js";
+import { ContainerSign, Form } from "../components/Styled.js";
 
 
 export default function SignIn(){
@@ -33,7 +33,7 @@ export default function SignIn(){
   }
 
   return(
-    <Container>
+    <ContainerSign>
       <Logo />
       <Form onSubmit={handleSubmit} >
         <input
@@ -57,7 +57,7 @@ export default function SignIn(){
         <button data-test="sign-in-submit" >Entrar</button>
       </Form>
       <Link to={"/cadastro"}><p>Primeira vez? Cadastre-se!</p></Link>      
-    </Container>
+    </ContainerSign>
   )
 }
 

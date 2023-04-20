@@ -2,7 +2,7 @@ import axios from "axios";
 import Logo from "../components/Logo";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Container, Form } from "../style/signPagesStyle.js";
+import { ContainerSign, Form } from "../components/Styled.js";
 
 export default function SignUp(){
   const [form, setForm] = useState({name:"",email:"",password:"",passwordconfirm:""})
@@ -27,7 +27,7 @@ export default function SignUp(){
   }
   
   return(
-    <Container>
+    <ContainerSign>
       <Logo />
       <Form onSubmit={handleSubmit}>
         <input
@@ -69,7 +69,7 @@ export default function SignUp(){
         <button data-test="sign-up-submit" >Cadastrar</button>
       </Form>
       <Link to={"/"}><p>Já tem uma conta? Entre agora!</p></Link>      
-    </Container>
+    </ContainerSign>
   )
 }
 
