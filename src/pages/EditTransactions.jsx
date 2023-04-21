@@ -13,7 +13,7 @@ export default function EditTransaction(){
 
   useEffect(()=>{
     const savedUser = JSON.parse(localStorage.getItem("user"))
-    const obj = {value: searchParams.get("value").replace(".",","), description: searchParams.get("description")}    
+    const obj = {value: searchParams.get("value"), description: searchParams.get("description")}    
     setForm(obj)
     if(!savedUser){
       navigate("/")      
