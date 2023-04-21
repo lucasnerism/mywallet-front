@@ -23,8 +23,8 @@ export default function Transaction({date, description, value, type, id}){
     <ContainerTransaction>
       <div>
         <p style={{color: "#C6C6C6", marginRight: "10px"}}>{date}</p>
-        <Link to={`/editar-transacao/${type}/${id}?value=${value}&description=${description}`}>
-        <p style={{cursor: "pointer"}}> {description}</p>
+        <Link to={`/editar-registro/${type}/${id}?value=${value.toFixed(2)}&description=${description}`}>
+        <p style={{cursor: "pointer", minWidth:"10px"}}> {description}</p>
         </Link>
       </div>
       <div>

@@ -46,6 +46,7 @@ export default function EditTransaction(){
         <input name="value" placeholder="Valor" type="text" value={form.value} onChange={handleChange} required />
         <input name="description" placeholder="Descrição" type="text" value={form.description} onChange={handleChange} required />
         <button>Atualizar {type === "in"? "entrada": "saída"}</button>
+        <button type="button" onClick={()=>navigate(-1)} style={{marginTop:"13px"}}>Cancelar</button>
       </Form>
     </ContainerHome>
   )

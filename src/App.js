@@ -21,7 +21,7 @@ export default function App() {
             <Route path="/cadastro" element={<SignUp />} />
             <Route path="/home" element={<Home />} />
             <Route path="/nova-transacao/:type" element={<NewTransaction />} />
-            <Route path="/editar-transacao/:type/:id" element={<EditTransaction />} />
+            <Route path="/editar-registro/:type/:id" element={<EditTransaction />} />
           </Routes>
         </UserContext.Provider>
       </BrowserRouter>
