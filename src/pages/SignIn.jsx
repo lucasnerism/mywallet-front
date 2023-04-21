@@ -1,7 +1,7 @@
 import axios from "axios";
 import Logo from "../components/Logo";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/userContext.js";
 import { ContainerSign, Form } from "../components/Styled.js";
 
@@ -10,6 +10,14 @@ export default function SignIn(){
   const [form, setForm] = useState({email:"",password:""})
   const {setUser} = useContext(UserContext)
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    const savedUser = localStorage.getItem("user")
+    if(savedUser){
+      setUser(JSON.parse(savedUser))
+      navigate("/home")
+    }
+  })
 
   function handleChange(e){
     let obj = {...form};
@@ -28,7 +36,7 @@ export default function SignIn(){
         navigate("/home")
       })
       .catch((err) =>{
-        alert(err.response.data.details)
+        alert(err.response.data)        
       })
   }
 

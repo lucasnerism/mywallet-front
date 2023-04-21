@@ -46,6 +46,7 @@ const ResetStyle = createGlobalStyle`
 	}
 	a{
 		text-decoration: none;
+		color: inherit;
 	}
 `;
 

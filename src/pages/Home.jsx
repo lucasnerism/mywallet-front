@@ -1,20 +1,46 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/userContext.js";
 import {IoAddCircleOutline, IoRemoveCircleOutline, IoLogOutOutline} from "react-icons/io5"
 import Transaction from "../components/Transaction.jsx";
 import { ButtonTransaction, ContainerButtons, ContainerHome, ContainerTotal, ContainerTransactions, Header } from "../components/Styled.js";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
 export default function Home(){
-  const {user} = useContext(UserContext)
+  const {user, setUser} = useContext(UserContext)
   const [transactions, setTransactions] = useState(null)  
   const [total, setTotal] = useState(0)
   const navigate = useNavigate();
 
-  function getTotal(){    
+  useEffect(()=>{
+    const savedUser = JSON.parse(localStorage.getItem("user"))
+    let config
+    if(savedUser){
+        setUser(savedUser)
+        config = {
+          headers:{
+            Authorization: `Bearer ${savedUser.token}`
+          }
+        }
+      } else {
+        navigate("/")
+    }
+    
+    
+    axios.get(`${process.env.REACT_APP_API_URL}/transactions`,config)
+      .then((res) =>{        
+        setTransactions(res.data)
+        getTotal(res.data)
+      })
+      .catch(err => console.log(err));
+        
+
+  },[])
+  
+  function getTotal(arr){    
     let sum = 0;
-    transactions.forEach(el => {
+    arr.forEach(el => {
       if(el.type === "out"){
         sum-=el.value
       } else {
@@ -31,28 +57,22 @@ export default function Home(){
 
   return(
     <ContainerHome>
-      <Header><h1>{`Olá, ${user}`}</h1> <IoLogOutOutline onClick={logout} size={"25px"} color="#FFFFFF" /> </Header>
+      <Header><h1>{`Olá, ${user?.name}`}</h1> <IoLogOutOutline onClick={logout} size={"25px"} color="#FFFFFF" /> </Header>
       <ContainerTransactions>
         <div>
-      <Transaction date={"20/04"}
-        description={"salário"}
-        value={"10000,00"}
-        type={"in"}
-        />
-        <Transaction date={"21/04"}
-        description={"guitarra"}
-        value={"5000,00"}
-        type={"out"}
-        />
-        {/* {transactions? transactions.map(el=> 
-        <Transaction date={el.date}
+        {(transactions && transactions.length !== 0)? transactions.map(el=> 
+        <Transaction key={el._id} date={el.date}
         description={el.description}
         value={el.value}
         type={el.type}
-        />) : <h2>Não há registros de entrada ou saída</h2>} */}
+        id={el._id}
+        />) : <h2>Não há registros de entrada ou saída</h2>}
         </div>
         <ContainerTotal>
-          <h3><strong>SALDO</strong></h3><h3>{total}</h3>
+          {(transactions && transactions.length !== 0)? <>
+          <h3><strong>SALDO</strong></h3>
+          <h3 style={{color: total>0? "#03AC00" : "#C70000"}}>{Math.abs(total).toFixed(2).replace(".",",")}</h3>
+          </> : ""}
         </ContainerTotal>
       </ContainerTransactions>
       <ContainerButtons>

@@ -18,12 +18,13 @@ export default function SignUp(){
     e.preventDefault();
     if(form.password !== form.passwordconfirm) {
       alert("As senhas precisam ser iguais")
-    }
-    axios.post(`${process.env.REACT_APP_API_URL}/sign-up`, form)
-      .then(navigate("/"))
+    } else{
+    axios.post(`${process.env.REACT_APP_API_URL}/sign-up`, {name:form.name.trim(), email:form.email.trim(), password:form.password.trim()})
+      .then(()=>navigate("/"))
       .catch((err) =>{
-        alert(err.response.data.details)
+        alert(err.response.data)
       })
+    }
   }
   
   return(

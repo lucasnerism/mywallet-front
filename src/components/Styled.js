@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const ContainerApp = styled.div`
+width: 375px;
+margin: auto;
+`;
+
 export const ContainerSign = styled.div`
   display: flex;
   flex-direction: column;
@@ -29,6 +34,9 @@ export const Form = styled.form`
     border-radius: 5px;
     border: none;
     margin-bottom: 13px;
+    ::placeholder{
+      color:#000000
+    }
   }
   button{
     width: 326px;
@@ -39,6 +47,7 @@ export const Form = styled.form`
     color: #FFFFFF;
     font-weight: 700;
     font-size: 20px;
+    cursor: pointer;
   }
 `;
 
@@ -92,13 +101,19 @@ export const ContainerTransactions = styled.div`
     font-size: 20px;
     line-height: 23px;
     width: 200px;
-  }  
+  }
+  div{
+    overflow: scroll;
+  }
 `;
 
 export const ContainerTotal = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 17px;
+  height: 40px;
+  background-color: #FFFFFF;
   strong{
     font-weight: 700;
   }
