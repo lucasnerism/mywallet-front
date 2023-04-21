@@ -57,7 +57,7 @@ export default function Home(){
 
   return(
     <ContainerHome>
-      <Header><h1>{`Olá, ${user?.name}`}</h1> <IoLogOutOutline onClick={logout} size={"25px"} color="#FFFFFF" /> </Header>
+      <Header><h1>{`Olá, ${user?.name}`}</h1> <IoLogOutOutline style={{cursor:"pointer"}} onClick={logout} size={"25px"} color="#FFFFFF" /> </Header>
       <ContainerTransactions>
         <div>
         {(transactions && transactions.length !== 0)? transactions.map(el=> 
