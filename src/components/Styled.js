@@ -104,6 +104,12 @@ export const ContainerTransactions = styled.div`
   }
   div{
     overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    ::-webkit-scrollbar{
+      display: none;
+    }
+    
   }
 `;
 
