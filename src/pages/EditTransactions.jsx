@@ -33,7 +33,7 @@ export default function EditTransaction(){
         Authorization: `Bearer ${user.token}`
       }
     }
-    const obj = {value: Number(form.value.replace(",",".")), description:form.description, type}
+    const obj = {value: Number(form.value.replace(",",".").toFixed(2)), description:form.description.trim(), type}
     axios.put(`${process.env.REACT_APP_API_URL}/transactions/${id}`, obj, config)
       .then(()=>navigate("/home"))
       .catch(err => alert(err.response.data))

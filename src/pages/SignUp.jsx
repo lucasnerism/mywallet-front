@@ -20,7 +20,9 @@ export default function SignUp(){
       alert("As senhas precisam ser iguais")
     } else{
     axios.post(`${process.env.REACT_APP_API_URL}/sign-up`, {name:form.name.trim(), email:form.email.trim(), password:form.password.trim()})
-      .then(()=>navigate("/"))
+      .then(()=>{
+        alert("Conta criada com sucesso!")
+        navigate("/")})
       .catch((err) =>{
         alert(err.response.data)
       })
