@@ -31,7 +31,10 @@ export default function NewTransaction(){
         Authorization: `Bearer ${user.token}`
       }
     }
-    const obj = {value: Number(form.value.replace(",",".")), description:form.description, type}
+
+    const roundValue = Math.round( form.value * 1e2 ) / 1e2
+
+    const obj = {value: roundValue, description:form.description, type}
     axios.post(`${process.env.REACT_APP_API_URL}/transactions`, obj, config)
       .then(()=>navigate("/home"))
       .catch(err => alert(err.response.data))
