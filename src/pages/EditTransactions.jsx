@@ -6,7 +6,7 @@ import axios from "axios";
 
 export default function EditTransaction(){
   const {type, id} = useParams();
-  const {user} = useContext(UserContext)
+  const {user, setUser} = useContext(UserContext)
   const [form, setForm] = useState({value:"",description:""})  
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -17,7 +17,9 @@ export default function EditTransaction(){
     setForm(obj)
     if(!savedUser){
       navigate("/")      
-    }
+    } else{
+      setUser(savedUser);
+    }    
   },[])
 
   function handleChange(e){
