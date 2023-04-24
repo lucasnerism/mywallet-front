@@ -71,12 +71,15 @@ export const Header = styled.header`
   width: 100%;
   padding: 0 24px;
   justify-content: space-between;
-  align-items: center;
+  align-items: center;  
+  white-space: nowrap;  
   h1{
     color: #FFFFFF;
     font-weight: 700;
     font-size: 26px;
     line-height: 31px;
+    overflow: hidden;
+    max-width:290px ;
   }
 `;
 
@@ -135,6 +138,7 @@ export const ContainerTransaction = styled.div`
   margin-bottom: 18px;
   div{
     display: flex;
+    white-space: nowrap;
   }
 `;
 
