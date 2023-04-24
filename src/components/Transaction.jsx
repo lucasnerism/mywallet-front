@@ -24,7 +24,7 @@ export default function Transaction({date, description, value, type, id}){
       <div>
         <p style={{color: "#C6C6C6", marginRight: "10px"}}>{date}</p>
         <Link to={`/editar-registro/${type}/${id}?value=${value.toFixed(2)}&description=${description}`}>
-        <p style={{cursor: "pointer", minWidth:"10px", maxWidth:"160px"}}> {description}</p>
+        <p style={{cursor: "pointer", minWidth:"10px", maxWidth:"160px",overflow:"hidden",whiteSpace:"nowrap",textOverflow:"ellipsis"}}> {description}</p>
         </Link>
       </div>
       <div>

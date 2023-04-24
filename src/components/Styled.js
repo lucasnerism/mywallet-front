@@ -79,6 +79,8 @@ export const Header = styled.header`
     font-size: 26px;
     line-height: 31px;
     overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     max-width:290px ;
   }
 `;
@@ -137,8 +139,7 @@ export const ContainerTransaction = styled.div`
   line-height: 19px;
   margin-bottom: 18px;
   div{
-    display: flex;
-    white-space: nowrap;
+    display: flex;    
   }
 `;
 
