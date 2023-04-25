@@ -1,14 +1,16 @@
-import axios from "axios";
 import Logo from "../components/Logo";
+import { ThreeDots } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/userContext.js";
 import { ContainerSign, Form } from "../components/Styled.js";
+import api from "../services/apiServices.js";
 
 
 export default function SignIn(){
   const [form, setForm] = useState({email:"",password:""})
   const {setUser} = useContext(UserContext)
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(()=>{
@@ -27,8 +29,9 @@ export default function SignIn(){
 
   function handleSubmit(e){
     e.preventDefault();
-    
-    axios.post(`${process.env.REACT_APP_API_URL}/sign-in`, form)
+    setLoading(true);
+
+    api.login(form)
       .then((res)=>{
         const obj = {name:res.data.name, token: res.data.token}
         setUser(obj)
@@ -36,7 +39,8 @@ export default function SignIn(){
         navigate("/home")
       })
       .catch((err) =>{
-        alert(err.response.data)        
+        alert(err.response.data);
+        setLoading(false);
       })
   }
 
@@ -62,7 +66,14 @@ export default function SignIn(){
           required
           data-test="password"
         />
-        <button data-test="sign-in-submit" >Entrar</button>
+        <button data-test="sign-in-submit" disabled={loading}>{loading ? <ThreeDots
+            height="13"
+            width="51"
+            radius="9"
+            color="#FFFFFF"
+            ariaLabel="three-dots-loading"
+            visible={true}
+          /> : "Entrar"}</button>
       </Form>
       <Link to={"/cadastro"}><p>Primeira vez? Cadastre-se!</p></Link>      
     </ContainerSign>

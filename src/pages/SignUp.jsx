@@ -1,11 +1,13 @@
-import axios from "axios";
 import Logo from "../components/Logo";
+import { ThreeDots } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ContainerSign, Form } from "../components/Styled.js";
+import api from "../services/apiServices.js";
 
 export default function SignUp(){
   const [form, setForm] = useState({name:"",email:"",password:"",passwordconfirm:""})
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate()
 
   function handleChange(e){
@@ -16,15 +18,18 @@ export default function SignUp(){
   
   function handleSubmit(e){
     e.preventDefault();
+    setLoading(true);
     if(form.password !== form.passwordconfirm) {
       alert("As senhas precisam ser iguais")
     } else{
-    axios.post(`${process.env.REACT_APP_API_URL}/sign-up`, {name:form.name.trim(), email:form.email.trim(), password:form.password.trim()})
+      const body = {name:form.name.trim(), email:form.email.trim(), password:form.password.trim()}
+    api.signUp(body)
       .then(()=>{
         alert("Conta criada com sucesso!")
         navigate("/")})
       .catch((err) =>{
-        alert(err.response.data)
+        alert(err.response.data);
+        setLoading(false);
       })
     }
   }
@@ -69,7 +74,14 @@ export default function SignUp(){
           required
           data-test="conf-password"
         />
-        <button data-test="sign-up-submit" >Cadastrar</button>
+        <button data-test="sign-up-submit" disabled={loading}>{loading ? <ThreeDots
+            height="13"
+            width="51"
+            radius="9"
+            color="#FFFFFF"
+            ariaLabel="three-dots-loading"
+            visible={true}
+          /> :"Cadastrar"}</button>
       </Form>
       <Link to={"/"}><p>Já tem uma conta? Entre agora!</p></Link>      
     </ContainerSign>

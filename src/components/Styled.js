@@ -47,7 +47,13 @@ export const Form = styled.form`
     color: #FFFFFF;
     font-weight: 700;
     font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
+    :disabled{
+      opacity: 0.7;
+    }
   }
 `;
 
@@ -161,4 +167,11 @@ export const ButtonTransaction = styled.button`
     line-height: 20px;
     width: 40px;
   }
+`;
+
+export const ContainerLoading = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
 `;

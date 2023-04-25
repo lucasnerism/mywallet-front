@@ -2,19 +2,15 @@ import { Link } from "react-router-dom";
 import { ContainerTransaction } from "./Styled.js";
 import { useContext } from "react";
 import { UserContext } from "../contexts/userContext.js";
-import axios from "axios";
+import api from "../services/apiServices.js";
+
 
 export default function Transaction({date, description, value, type, id}){
   const {user} = useContext(UserContext)  
 
   function deleteEntry(){
     if(window.confirm("Você realmente deseja deletar a operação?")){
-    const config ={
-      headers:{
-        Authorization:`Bearer ${user.token}`
-      }
-    };
-    axios.delete(`${process.env.REACT_APP_API_URL}/transactions/${id}`, config)
+    api.deleteTransaction(user.token, id)    
       .then(()=> window.location.reload())
       .catch(err => alert(err.response.data))}
   }
