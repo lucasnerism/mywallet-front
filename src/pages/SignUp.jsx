@@ -17,11 +17,11 @@ export default function SignUp(){
   }
   
   function handleSubmit(e){
-    e.preventDefault();
-    setLoading(true);
+    e.preventDefault();    
     if(form.password !== form.passwordconfirm) {
-      alert("As senhas precisam ser iguais")
+      alert("As senhas precisam ser iguais")      
     } else{
+      setLoading(true);
       const body = {name:form.name.trim(), email:form.email.trim(), password:form.password.trim()}
     api.signUp(body)
       .then(()=>{
