@@ -50,7 +50,7 @@ export default function SignIn(){
       <Form onSubmit={handleSubmit} >
         <input
           placeholder="E-mail"
-          type="text"
+          type="email"
           name="email"
           value={form.email}
           onChange={handleChange}
@@ -63,6 +63,7 @@ export default function SignIn(){
           name="password"
           value={form.password}
           onChange={handleChange}
+          minLength={3}
           required
           data-test="password"
         />

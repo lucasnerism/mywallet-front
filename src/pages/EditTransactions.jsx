@@ -31,7 +31,8 @@ export default function EditTransaction(){
     e.preventDefault();
     setLoading(true); 
 
-    const roundValue = Math.round( form.value * 1e2 ) / 1e2
+    const twoDecimals = 1e2
+    const roundValue = Math.round( form.value * twoDecimals ) / twoDecimals
 
     const body = {value:roundValue , description:form.description.trim(), type}
     api.editTransaction(body, user.token, id)    

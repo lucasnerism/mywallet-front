@@ -49,7 +49,7 @@ export default function SignUp(){
         />
         <input
           placeholder="E-mail"
-          type="text"
+          type="email"
           name="email"
           value={form.email}
           onChange={handleChange}
@@ -63,6 +63,7 @@ export default function SignUp(){
           value={form.password}
           onChange={handleChange}
           required
+          minLength={3}
           data-test="password"
         />
         <input
@@ -71,6 +72,7 @@ export default function SignUp(){
           name="passwordconfirm"
           value={form.passwordconfirm}
           onChange={handleChange}
+          minLength={3}
           required
           data-test="conf-password"
         />

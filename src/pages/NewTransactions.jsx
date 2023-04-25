@@ -26,14 +26,10 @@ export default function NewTransaction(){
 
   function handleSubmit(e){
     e.preventDefault();
-    setLoading(true)
-    const config = {
-      headers:{
-        Authorization: `Bearer ${user.token}`
-      }
-    }
+    setLoading(true);
 
-    const roundValue = Math.round( form.value * 1e2 ) / 1e2
+    const twoDecimals = 1e2
+    const roundValue = Math.round( form.value * twoDecimals ) / twoDecimals
 
     const body = {value: roundValue, description:form.description, type}
     api.newTransaction(body, user.token)    
