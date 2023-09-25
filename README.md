@@ -1,7 +1,7 @@
 # MyWallet
 
 ## Description
-A basic finance management application.
+A basic finance management application. Made with React + JavaScript.
 + Allows for account creation and authentication
 + Create, update or delete incomes and outcomes.
 
