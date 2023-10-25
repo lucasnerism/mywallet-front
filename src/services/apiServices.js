@@ -32,6 +32,11 @@ function deleteTransaction(token, id) {
   return axios.delete(`${process.env.REACT_APP_API_URL}/transactions/${id}`, config);
 }
 
-const api = { login, signUp, getTransaction, newTransaction, editTransaction, deleteTransaction };
+function deleteAllTransactions(token) {
+  const config = createConfig(token);
+  return axios.delete(`${process.env.REACT_APP_API_URL}/transactions`, config);
+}
+
+const api = { login, signUp, getTransaction, newTransaction, editTransaction, deleteTransaction, deleteAllTransactions };
 
 export default api;
